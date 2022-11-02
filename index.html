@@ -1,0 +1,35 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webmap</title>
+    <link rel="stylesheet" href="./libs/v6.5.0-dist/ol.css">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+ <div class="grid-container">
+     <div class="grid-1">
+         <div class="sidebar">
+             <h2>Base Layers</h2>
+             <input type="radio" name = 'baseLayerButton' value = 'OSMStandard' checked>OSM Standard <br>
+             <input type="radio" name = 'baseLayerButton' value = 'OSMHumanitarian' >OSM Humanitarian <br>
+             <input type="radio" name = 'baseLayerButton' value = 'BingmapsLabels' >Bing maps Labels <br>
+             <input type="radio" name = 'baseLayerButton' value = 'CartoDB' >Carto DB <br>
+             <input type="radio" name = 'baseLayerButton' value = 'Stamenterrain' >Stamen terrain <br>
+             <h2>Vector Layers</h2>
+             <input type="checkbox" name = 'rasterTileLayerCheckbox' value = 'TileDebugLayer' checked>TileDebug Layer <br>
+             <input type="checkbox" name = 'rasterTileLayerCheckbox' value = 'NOAAWMSLayer' >NOAAWMSLayer<br>
+             <input type="checkbox" name = 'rasterTileLayerCheckbox' value = 'ArcGisLayer' >ArcGis layer<br>
+         </div>
+     </div>
+     <div class="grid2">
+        <div id='js-map' class="map"></div>
+     </div>
+ </div>
+    
+    <script src="./libs/v6.5.0-dist/ol.js"></script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
