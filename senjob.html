@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_job {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+            <style>
+                p, h2{
+                     text-align: center;
+                }
+            </style>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.fullscreen/1.4.2/Control.FullScreen.min.css"/>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_job" ></div>
+        
+    
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SENJOB</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+  $( function() {
+    $( "#maplegend" ).draggable({
+                    start: function (event, ui) {
+                        $(this).css({
+                            right: "auto",
+                            top: "auto",
+                            bottom: "auto"
+                        });
+                    }
+                });
+});
+
+  </script>
+</head>
+<body>
+
+
+<div id='maplegend' class='maplegend'
+    style='position: absolute; z-index:9999; border:2px solid grey; background-color:rgba(255, 255, 255, 0.8);
+     border-radius:6px; padding: 10px; font-size:14px; right: 20px; bottom: 20px;'>
+
+<div class='legend-title'>Légende</div>
+<div class='legend-scale'>
+  <ul class='legend-labels'>
+   <!-- <li><span style='background:darkred;opacity:1.0;'></span>CDI</li> -->
+    <li><span style='background:red;opacity:1.0;'></span>CDD</li>
+    <!--<li><span style='background:lightskyblue;opacity:1.0;'></span>Thèse</li>-->
+    <!--<li><span style='background:rgb(116, 175, 26);opacity:1.0;'></span>Post - Doc</li>  -->
+    <li><span style='background:rgb(166, 40, 166);opacity:1.0;'></span>Consultance</li>
+    <!--<li><span style='background:orange;opacity:1.0;'></span>VAE</li>  -->  
+    <!--<li><span style='background:rgb(250, 154, 170);opacity:1.0;'></span>Stage</li> -->
+  </ul>
+</div>
+</div>
+
+</body>
+</html>
+
+<style type='text/css'>
+  .maplegend .legend-title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 90%;
+    }
+  .maplegend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .maplegend .legend-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+    }
+  .maplegend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 5px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .maplegend .legend-source {
+    font-size: 80%;
+    color: #777;
+    clear: both;
+    }
+  .maplegend a {
+    color: #777;
+    }
+</style>
+
+</body>
+<script>
+    
+    
+            var map_job = L.map(
+                "map_job",
+                {
+                    center: [15.0, -14.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 7,
+                    zoomControl: true,
+                    preferCanvas: true,
+                    drawControl: false,
+                    measureControl: false,
+                    drawExport: false,
+                    layersControl: true,
+                }
+            );
+            L.control.scale().addTo(map_job);
+
+            
+
+        
+    
+            var tile_layer_osm = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 24, "maxZoom": 24, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_job);
+        
+    
+            L.control.fullscreen(
+                {"forceSeparateButton": false, "position": "topleft", "title": "Full Screen", "titleCancel": "Exit Full Screen"}
+            ).addTo(map_job);
+        
+    
+            L.Control.geocoder(
+                {"collapsed": true, "defaultMarkGeocode": true, "position": "topleft"}
+            ).on('markgeocode', function(e) {
+                map_job.setView(e.geocode.center, 11);
+            }).addTo(map_job);
+
+        
+    
+            map_job.fitBounds(
+                [[15, -14], [15, -14]],
+                {"maxZoom": 4}
+            );
+        
+    /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+            var marker_cluster = L.markerClusterGroup(
+                {}
+            );
+            map_job.addLayer(marker_cluster);
+        
+    
+            var marker_4531bdb17fcd9bd66deb889667dd2ec3 = L.marker(
+                [-4.36772477839997, 15.372999012900362],
+                {}
+            ).addTo(marker_cluster);
+        
+            
+            var icon_3fafc6863cd5a98360d7c31d856cf68c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "purple", "prefix": "fa"}
+            );
+            marker_4531bdb17fcd9bd66deb889667dd2ec3.setIcon(icon_3fafc6863cd5a98360d7c31d856cf68c);
+        
+    
+        var popup_b9132c151e1e585d2ad312a5cc5ccf22 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_5755aedcae69090afd409c8175231ab8 = $(`<div id="html_5755aedcae69090afd409c8175231ab8" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/" target="_blank">  <h2> Short-Term Consultancy on Digital Monitoring & Evaluation and GIS – Local Recruitment (Country Office appointment) </h2></a><br>
+
+                    <br>
+                    <b>Localisation</b>: Kinshasa, Democratic Republic of the Congo<br><b>Date de mise en ligne</b>: 2022-12-06T00:00:00<br><b>Date limite</b>: 2022-12-21T00:00:00<br><b>Type de contrat</b>: Consultance<br><b>Domaine</b>: Suivi - Evaluation<br><b>Niveau d'étude</b>: Bac + 5<br><b>Expérience</b>: 3 ans<br>
+                    <br> 
+                    <a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br>
+                    </div>`)[0];
+                popup_b9132c151e1e585d2ad312a5cc5ccf22.setContent(html_5755aedcae69090afd409c8175231ab8);
+            
+        
+
+        marker_4531bdb17fcd9bd66deb889667dd2ec3.bindPopup(popup_b9132c151e1e585d2ad312a5cc5ccf22)
+        ;
+
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+    
+    
+            var marker_c1008c8e7d7dec85b0926221cc6c48c8 = L.marker(
+                [15.621058838066627, 19.03855261419993],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_edb3efc31773797fb471f013a6254f0c = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "purple", "prefix": "fa"}
+            );
+            marker_c1008c8e7d7dec85b0926221cc6c48c8.setIcon(icon_edb3efc31773797fb471f013a6254f0c);
+        
+    
+        var popup_e386189fb8ff5ad81e007dc5abd89b0f = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_530a11a2a508e659c8749cf81da01acc = $(`<div id="html_530a11a2a508e659c8749cf81da01acc" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://reliefweb.int/job/3913557/gis-me-and-mobile-data-collection-specialist" target="_blank">  <h2>GIS, M&E, and Mobile Data Collection Specialist </h2></a><br>
+                    <b>Localisation</b>: Tchad<br><b>Date de mise en ligne</b>: 2022-12-06T00:00:00<br><b>Date limite</b>: None<br><b>Type de contrat</b>: Consultance<br><b>Domaine</b>: Suivi - Evaluation<br><b>Niveau d'étude</b>: Bac + 5 ou plus<br><b>Expérience</b>: 5 ans<br>
+                    <br>  <a class="btn btn-success" href="https://reliefweb.int/job/3913557/gis-me-and-mobile-data-collection-specialist">Candidater</a><br></div>`)[0];
+                popup_e386189fb8ff5ad81e007dc5abd89b0f.setContent(html_530a11a2a508e659c8749cf81da01acc);
+            
+        
+
+        marker_c1008c8e7d7dec85b0926221cc6c48c8.bindPopup(popup_e386189fb8ff5ad81e007dc5abd89b0f)
+        ;
+
+        
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+
+
+
+            /* CDD n° 2 */ 
+
+
+
+
+
+        var marker_cdd_1 = L.marker(
+                [16.468967, 8.374408],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_cdd_1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_cdd_1.setIcon(icon_cdd_1);
+        
+    
+        var popup_cdd_1 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_cdd_1 = $(`<div id="html_cdd_1" style="width: 100.0%; height: 100.0%;">
+                    <a href="http://www.sengeomatik.org/blog/co-coordinateur-du-cluster-education.html" target="_blank">  <h2>Co-Coordinateur du Cluster Éducation</h2></a><br>
+                    <b>Localisation</b>: Niger
+                    <br><b>Date de mise en ligne</b> : 7 Dec 2022<br>
+                    <b>Date limite</b> : 21 Dec 2022 <br>
+                    <b>Type de contrat</b> : CDD <br>
+                    <b>Domaine</b>: Program/Project Management <br>
+                    <b>Niveau d'étude</b>: Bac + 5 ou plus<br>
+                    <b>Expérience</b>: 5 à 9 ans<br>
+                    <br>  <a class="btn btn-success" href="http://www.sengeomatik.org/blog/co-coordinateur-du-cluster-education.html"target="_blank">Candidater</a><br></div>`)[0];
+                popup_cdd_1.setContent(html_cdd_1);
+            
+        
+
+        marker_cdd_1.bindPopup(popup_cdd_1)
+        ;
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+         /* CDD n° 1 */ 
+            var marker_cdd_1 = L.marker(
+                [40.7127753, -74.0059728],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_cdd_1 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_cdd_1.setIcon(icon_cdd_1);
+        
+    
+        var popup_cdd_1 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_cdd_1 = $(`<div id="html_cdd_1" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://reliefweb.int/job/3843365/data-manager-staff-associates-ll" target="_blank"> <h2>Data Manager (Staff Associates ll)</h2></a><br>
+                    <b>Localisation</b>:  New York<br>
+                    <b>Date de mise en ligne</b> : None<br>
+                    <b>Date limite</b> : 2023-01-07 <br>
+                    <b>Type de contrat</b> : CDD <br>
+                    <b>Domaine</b>: Suivi - Evaluation <br>
+                    <b>Niveau d'étude</b>: Bac + 5<br>
+                    <b>Expérience</b>: 5 à 10 ans<br>
+                    <br>  <a class="btn btn-success" href="https://reliefweb.int/job/3843365/data-manager-staff-associates-ll"target="_blank">Candidater</a><br></div>`)[0];
+                popup_cdd_1.setContent(html_cdd_1);
+            
+        
+
+        marker_cdd_1.bindPopup(popup_cdd_1);
+
+
+      /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+      /* CDD n° 3 */ 
+
+                     var marker_cdd_3 = L.marker(
+                [14.716677, -17.4676861],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_cdd_3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_cdd_3.setIcon(icon_cdd_3);
+        
+    
+        var popup_cdd_3 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_cdd_3 = $(`<div id="html_cdd_3" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://www.developmentaid.org/jobs/view/1295919/assistant-de-projet-doctorant-ou-post-doctorant-en-securite-alimentaire" target="_blank">  <h2>Assistant de Projet-Doctorant ou Post doctorant en Sécurité Alimentaire</h2></a><br>
+                    <b>Localisation</b>:  Dakar<br>
+                    <b>Date de mise en ligne</b> : 2022-11-24<br>
+                    <b>Date limite</b> : 2023-01-07 <br>
+                    <b>Type de contrat</b> : CDD <br>
+                    <b>Domaine</b>: Sécurité Alimentaire, Aide Humanitaire & Urgence <br>
+                    <b>Niveau d'étude</b>: Bac + 5<br>
+                    <b>Expérience</b>: 0 à 3 ans<br>
+                    <br>  <a class="btn btn-success" href="https://www.developmentaid.org/jobs/view/1295919/assistant-de-projet-doctorant-ou-post-doctorant-en-securite-alimentaire"target="_blank">Candidater</a><br></div>`)[0];
+                popup_cdd_3.setContent(html_cdd_3);
+            
+        
+
+        marker_cdd_3.bindPopup(popup_cdd_3);
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+         /* CDD n° 4 */ 
+
+
+
+
+
+             var marker_cdd_4 = L.marker(
+                [17.570692, -3.996166],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_cdd_4 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_cdd_4.setIcon(icon_cdd_4);
+        
+    
+        var popup_cdd_4 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_cdd_4 = $(`<div id="html_cdd_4" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://www.developmentaid.org/jobs/view/1299790/expert-suivi-evaluation-et-reporting-npsa-npsa8" target="_blank">  <h2> Expert Suivi, Evaluation et Reporting, NPSA, NPSA8 </h2></a><br>
+                    <b>Localisation</b>:  Mali<br>
+                    <b>Date de mise en ligne</b> : 2022-12-07<br>
+                    <b>Date limite</b> : none <br>
+                    <b>Type de contrat</b> : CDD <br>
+                    <b>Domaine</b>: Suivi - Evaluation <br>
+                    <b>Niveau d'étude</b>: Bac + 5<br>
+                    <b>Expérience</b>: 2 ans<br>
+                    <br>  <a class="btn btn-success" href="https://www.developmentaid.org/jobs/view/1299790/expert-suivi-evaluation-et-reporting-npsa-npsa8"target="_blank">Candidater</a><br></div>`)[0];
+                popup_cdd_4.setContent(html_cdd_4);
+            
+        
+
+        marker_cdd_4.bindPopup(popup_cdd_4);
+
+
+
+
+         /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+         /* CDD n° 4 */ 
+
+
+
+             var marker_cdd_5 = L.marker(
+                [-13.133897, 27.849332],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_cdd_5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_cdd_5.setIcon(icon_cdd_5);
+        
+    
+        var popup_cdd_5 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_cdd_5 = $(`<div id="html_cdd_5" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://www.developmentaid.org/jobs/view/1298287/land-use-expert-lusaka-zambia" target="_blank">  <h2>Land-Use Expert</h2></a><br>
+                    <b>Localisation</b>:  Zambia<br>
+                    <b>Date de mise en ligne</b> : 2022-12-01<br>
+                    <b>Date limite</b> : none <br>
+                    <b>Type de contrat</b> : CDD <br>
+                    <b>Domaine</b>: Rural Development, Urban Development, Mapping & Cadastre<br>
+                    <b>Niveau d'étude</b>: Bac + 5<br>
+                    <b>Expérience</b>: 5 ans<br>
+                    <br>  <a class="btn btn-success" href="https://www.developmentaid.org/jobs/view/1298287/land-use-expert-lusaka-zambia"target="_blank">Candidater</a><br></div>`)[0];
+                popup_cdd_5.setContent(html_cdd_5);
+            
+        
+
+        marker_cdd_5.bindPopup(popup_cdd_5);
+
+
+
+        /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------*/ 
+
+
+
+            /* Consultance n° 3 */ 
+
+
+             var marker_consul_3 = L.marker(
+                [-18.8791902, 47.5079055],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_consul_3 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "f096ff", "markerColor": "purple", "prefix": "fa"}
+            );
+            marker_consul_3.setIcon(icon_consul_3);
+        
+    
+        var popup_consul_3 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_consul_3 = $(`<div id="html_consul_3" style="width: 100.0%; height: 100.0%;">
+                    <a href="https://www.portaljob-madagascar.com/emploi/view/madajob-rh93-technicien-sig114434" target="_blank">  <h2>Technicien SIG</h2></a><br>
+                    <b>Localisation</b>:  Antananarivo, Madagascar
+                    <br><b>Date de mise en ligne</b> : 01/12/2022 00:00:00<br>
+                    <b>Date limite</b> : None <br>
+                    <b>Type de contrat</b> : Consultance <br>
+                    <b>Domaine</b>: Suivi - Evaluation <br>
+                    <b>Niveau d'étude</b>: Bac + 3<br>
+                    <b>Expérience</b>: 2 ans<br>
+                    <br>  <a class="btn btn-success" href="https://www.portaljob-madagascar.com/emploi/view/madajob-rh93-technicien-sig114434"target="_blank">Candidater</a><br></div>`)[0];
+                popup_consul_3.setContent(html_consul_3);
+            
+        
+
+        marker_consul_3.bindPopup(popup_consul_3)
+
+
+         /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+    
+    
+            var marker_55e7c0d8526931f375e27d3c786adfa1 = L.marker(
+                [15.605768561933298, -15.53276172324535],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_14fc141c3a911222d5e3f32d76d315eb = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-sharp fa-solid fa-graduation-cap", "iconColor": "f0f0f0", "markerColor": "lightred", "prefix": "fa"}
+            );
+            marker_55e7c0d8526931f375e27d3c786adfa1.setIcon(icon_14fc141c3a911222d5e3f32d76d315eb);
+        
+    
+        var popup_25c404509aa436bfc3cd53e0fdcf52ea = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_533e07e98fffbc8fd9c9679f1d051ec4 = $(`<div id="html_533e07e98fffbc8fd9c9679f1d051ec4" style="width: 100.0%; height: 100.0%;"><b>Titre</b>: Test<br><b>Localisation</b>: SEN<br><b>Date de mise en ligne</b>: None<br><b>Date limite</b>: None<br><b>Type de contrat</b>: Stage<br><b>Domaine</b>: None<br><b>Niveau d'étude</b>: None<br><b>Expérience</b>: None<br> <br> <a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br></div>`)[0];
+                popup_25c404509aa436bfc3cd53e0fdcf52ea.setContent(html_533e07e98fffbc8fd9c9679f1d051ec4);
+            
+        
+
+        marker_55e7c0d8526931f375e27d3c786adfa1.bindPopup(popup_25c404509aa436bfc3cd53e0fdcf52ea)
+        ;
+
+ /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------      
+    
+    
+            var marker_949d4762425a33ff02d5d84d720a4efb = L.marker(
+                [13.923838187267672, -15.593922827778647],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_d558dbf9149ba13a549a988700d284ed = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "006400", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_949d4762425a33ff02d5d84d720a4efb.setIcon(icon_d558dbf9149ba13a549a988700d284ed);
+        
+    
+        var popup_b41ea2141540d882a9cf6bfdcbf8daed = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_e012fe6540c8337703bf56dc18465284 = $(`<div id="html_e012fe6540c8337703bf56dc18465284" style="width: 100.0%; height: 100.0%;"><b>Titre</b>: Test<br><b>Localisation</b>: None<br><b>Date de mise en ligne</b>: None<br><b>Date limite</b>: None<br><b>Type de contrat</b>: CDD<br><b>Domaine</b>: None<br><b>Niveau d'étude</b>: None<br><b>Expérience</b>: None<br> <br> <a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br></div>`)[0];
+                popup_b41ea2141540d882a9cf6bfdcbf8daed.setContent(html_e012fe6540c8337703bf56dc18465284);
+            
+        
+
+        marker_949d4762425a33ff02d5d84d720a4efb.bindPopup(popup_b41ea2141540d882a9cf6bfdcbf8daed)
+        ;
+
+        
+  /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+            var marker_4d877d00348962cc0be02def857849f8 = L.marker(
+                [13.220485485134773, -13.514445273646599],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_cdi = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "b4b4b4", "markerColor": "darkred", "prefix": "fa"}
+            );
+            marker_4d877d00348962cc0be02def857849f8.setIcon(icon_cdi);
+        
+    
+        var popup_5c17f7b700a2cf09d7900d1d37103cd5 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_779d84b3fbea02654c77673207da332f = $(`<div id="html_779d84b3fbea02654c77673207da332f" style="width: 100.0%; height: 100.0%;">
+                    <b>Titre</b>: Test<br>
+                    <b>Localisation</b>: None<br>
+                    <b>Date de mise en ligne</b>: None<br>
+                    <b>Date limite</b>: None<br>
+                    <b>Type de contrat</b>: CDI<br>
+                    <b>Domaine</b>: None<br>
+                    <b>Niveau d'étude</b>: None<br>
+                    <b>Expérience</b>: None<br>
+                    <br>
+                    <br> 
+                    <a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br>
+                    </div>`)[0];
+                popup_5c17f7b700a2cf09d7900d1d37103cd5.setContent(html_779d84b3fbea02654c77673207da332f);
+            
+        
+
+        marker_4d877d00348962cc0be02def857849f8.bindPopup(popup_5c17f7b700a2cf09d7900d1d37103cd5)
+        ;
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------      
+    
+    
+            var marker_8457dbb23319566534a168c6a3a58681 = L.marker(
+                [14.810674203000456, -13.055736989646883],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_f954aef895f65afa2530c7ff12d16d0e = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-light fa-briefcase", "iconColor": "fa0000", "markerColor": "orange", "prefix": "fa"}
+            );
+            marker_8457dbb23319566534a168c6a3a58681.setIcon(icon_f954aef895f65afa2530c7ff12d16d0e);
+        
+    
+        var popup_7fdd45b4afd7ce8ebdd30d2f50695fa9 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_c3f04db5ee9aef80bb54d49777ce1fd9 = $(`<div id="html_c3f04db5ee9aef80bb54d49777ce1fd9" style="width: 100.0%; height: 100.0%;"><b>Titre</b>: Test<br><b>Localisation</b>: None<br><b>Date de mise en ligne</b>: None<br><b>Date limite</b>: None<br><b>Type de contrat</b>: VAE<br><b>Domaine</b>: None<br><b>Niveau d'étude</b>: None<br><b>Expérience</b>: None<br> <br> <a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br></div>`)[0];
+                popup_7fdd45b4afd7ce8ebdd30d2f50695fa9.setContent(html_c3f04db5ee9aef80bb54d49777ce1fd9);
+            
+        
+
+        marker_8457dbb23319566534a168c6a3a58681.bindPopup(popup_7fdd45b4afd7ce8ebdd30d2f50695fa9)
+        ;
+
+ /* --------------------------------------------------------------------------------------------------------------------------------------------------------------------     
+    
+    
+            var marker_thesis_1 = L.marker(
+                [16.884099410201648, -16.08321166404501],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_thesis = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-sharp fa-solid fa-graduation-cap", "iconColor": "ffbb22", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_thesis_1.setIcon(icon_thesis);
+        
+        var popup_2421495264223b0a8474d7158d132442 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_cbe666dc7799198e7b74664f3e91f6e3 = $(`<div id="html_cbe666dc7799198e7b74664f3e91f6e3" style="width: 100.0%; height: 100.0%;"><b>Titre</b>: test<br><b>Localisation</b>: None<br><b>Date de mise en ligne</b>: None<br><b>Date limite</b>: None<br><b>Type de contrat</b>: Thèse<br><b>Domaine</b>: None<br><b>Niveau d'étude</b>: None<br><b>Expérience</b>: None <br> <br><a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br></div>`)[0];
+                popup_2421495264223b0a8474d7158d132442.setContent(html_cbe666dc7799198e7b74664f3e91f6e3);
+            
+        
+
+        marker_thesis_1.bindPopup(popup_2421495264223b0a8474d7158d132442)
+        ;
+
+/* --------------------------------------------------------------------------------------------------------------------------------------------------------------------        
+    
+    
+            var marker_postdoc_1 = L.marker(
+                [15.942154636866423, -14.248378528046144],
+                {}
+            ).addTo(marker_cluster);
+        
+    
+            var icon_postdoc = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "fa-sharp fa-solid fa-graduation-cap", "iconColor": "ffff4c", "markerColor": "green", "prefix": "fa"}
+            );
+            marker_postdoc_1.setIcon(icon_postdoc);
+        
+    
+        var popup_acd72bb05e963c27df38d258bd5105f9 = L.popup({"maxWidth": 500, "minWidth": 200});
+
+        
+            
+                var html_dd18346b29efbfebfdf9b73e6b8a42a8 = $(`<div id="html_dd18346b29efbfebfdf9b73e6b8a42a8" style="width: 100.0%; height: 100.0%;"><b>Titre</b>: test<br><b>Localisation</b>: None<br><b>Date de mise en ligne</b>: None<br><b>Date limite</b>: None<br><b>Type de contrat</b>: Post - Doc<br><b>Domaine</b>: None<br><b>Niveau d'étude</b>: None<br><b>Expérience</b>: None <br> <br>  <a class="btn btn-success" href="https://ngojobsinafrica.com/job/short-term-consultancy-on-digital-monitoring-evaluation-and-gis-local-recruitment-country-office-appointment/">Candidater</a><br></div>`)[0];
+                popup_acd72bb05e963c27df38d258bd5105f9.setContent(html_dd18346b29efbfebfdf9b73e6b8a42a8);
+            
+        
+
+                marker_postdoc_1.bindPopup(popup_acd72bb05e963c27df38d258bd5105f9)
+        ;
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------*/        
+    
+    
+            var layer_control = {
+                base_layers : {
+                    "OpenstreetMap" : tile_layer_osm,
+                },
+                overlays :  {
+                    "Postes" : marker_cluster,
+                },
+            };
+            L.control.layers(
+                layer_control.base_layers,
+                layer_control.overlays,
+                {"autoZIndex": true, "collapsed": true, "position": "topleft"}
+            ).addTo(map_job);
+        
+</script>
+</html>
